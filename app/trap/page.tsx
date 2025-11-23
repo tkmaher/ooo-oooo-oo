@@ -127,7 +127,7 @@ export default function DragCtx() {
     >
       100 logics to cut up the world into pieces
       <br/><br/>
-      <div style={{right: "50%", position: "absolute", transform: "translate(-50%, 0%)"}}>
+      <div style={{transform: "translate(50%, 0%)"}}>
         {eq.map((equation, index) => (
             <p key={index}>
               {index in links != null ? <a href={links[index]}><Latex>{equation}</Latex></a> : <Latex>{equation}</Latex>}

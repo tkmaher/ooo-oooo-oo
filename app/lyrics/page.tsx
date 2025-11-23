@@ -27,7 +27,7 @@ export default function DragCtx() {
         The sound of upside-down frescoes<br/>
         And the sound of invisible upside-down hands, turning<br/>
         The sound of nothing<br/>
-        And the sound of, <a target="_blank" href="https://youtube.com/shorts/MoZvuZLBmt8?si=B479tCQJ9fKEIkuh" >Ummm</a><br/>
+        And the sound of, <a target="_blank" href="https://www.youtube.com/shorts/MoZvuZLBmt8" >Ummm</a><br/>
       </div>
     </div>
   );

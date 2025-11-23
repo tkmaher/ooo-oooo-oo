@@ -70,6 +70,7 @@ export default function DragCtx() {
       style={{
         width: "100%",
         height: "100vh",
+        maxHeight: "100%",
         overflow: "hidden", // important to prevent page expansion
         position: "relative",
       }}
