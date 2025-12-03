@@ -1,19 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { DndContext } from "@dnd-kit/core";
-import { DragContainer } from "@/src/draggablestuff"
+import { DragContainer } from "@/src/draggablestuff";
 
-export default function DragCtx() {
+function DragCtx() {
   const files = [
     {
       type: "text",
-      src: "virtue",
+      src: "Performance at Blip --- Chicago 2025-12-12",
       class: "rotator-rev",
     },
     {
       type: "text",
-      src: "morality",
+      src: "Performance at Blip --- Chicago 2025-12-12",
       class: "rotator",
     },
   ]
@@ -21,18 +19,54 @@ export default function DragCtx() {
   return (
     
     <div
+    
       style={{
+        top: 0,
         width: "100%",
         height: "100vh",
         maxHeight: "100%",
         overflow: "hidden", // important to prevent page expansion
-        position: "relative",
-        padding: "10em"
+        padding: "10em",
+        position: "absolute",
       }}
     >
        
-        <a href="/">.</a><a href="/merchandise">.</a>
         <DragContainer files={files}/>
     </div>
+  );
+}
+
+export default function Home() {
+
+  const links = [
+    ["Home", "/"],
+    ["Album", "/"],
+    ["CDs", "/merchandise"],
+    ["Info", "/lyrics"],
+  ]
+  
+
+  return (
+    <>
+      <DragCtx/>
+      <div
+        style={{
+          width: "75%",
+          position: "relative",
+          marginTop: "5em",
+          marginLeft: "5em",
+          
+        }}
+      >
+        
+        <br/><br/>
+        <img style={{maxWidth: "200px"}} src="https://www.shutterstock.com/image-vector/chinese-dragon-sketch-handdrawn-vector-600w-2558763545.jpg"/>
+        {links.map(([title, link], index) => (
+            <p key={index}>
+              <a href={link}>{title}</a>
+            </p>
+          ))}
+      </div>
+    </>
   );
 }

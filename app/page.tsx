@@ -75,7 +75,7 @@ export default function DragCtx() {
         position: "relative",
       }}
     >
-      <a style={{fontSize: "5em", float: "right", margin: "1em"}} href="/trap">
+      <a style={{fontSize: "5em", float: "right", margin: "1em"}} href="/provided1">
       👀
       </a>
       <DragContainer files={files}/>

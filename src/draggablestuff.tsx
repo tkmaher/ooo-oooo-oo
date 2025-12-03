@@ -1,11 +1,17 @@
 import { useDraggable } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
-import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-export function DraggableBox(props: { x: number; y: number; id: number; type: string, src?: string, class?: string }) {
-    const router = useRouter();
+export function DraggableBox(props: { 
+    x: number; 
+    y: number; 
+    id: number; 
+    type: string; 
+    text?: string; 
+    src: string; 
+    class?: string 
+}) {
 
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: props.id,
@@ -61,7 +67,7 @@ export function DraggableBox(props: { x: number; y: number; id: number; type: st
     );
 }
 
-export function DragContainer(props: {files: { type: string; src: string; class?: string; }[] }) {
+export function DragContainer(props: {files: { type: string, text?: string, src: string, class?: string; }[] }) {
     const [coords, setCoords] = useState<[number, number][]>([]);
     const [tempDraggedPos, setTempDraggedPos] = useState({ x: 0, y: 0 });
     const [activeItemId, setActiveItemId] = useState<number | null>(null);
@@ -81,7 +87,9 @@ export function DragContainer(props: {files: { type: string; src: string; class?
     function handleDragStart(event: any) {
         setActiveItemId(event.active.id);
         const item = document.getElementById(event.active.id.toString());
-        if (item) item.style.filter = "blur(0px)";
+        if (item) {
+            item.style.filter = "blur(0px)";
+        }
       }
     
     function handleDragMove(event: any) {
@@ -118,6 +126,7 @@ export function DragContainer(props: {files: { type: string; src: string; class?
         onDragStart={handleDragStart}
         onDragMove={handleDragMove}
         onDragEnd={handleDragEnd}
+        
       >
         {coords.map((item, index) => (
           <DraggableBox
@@ -127,6 +136,7 @@ export function DragContainer(props: {files: { type: string; src: string; class?
             id={index}
             type={props.files[index].type}
             src={props.files[index].src}
+            text={props.files[index].text}
             class={props.files[index].class}
           />
         ))}

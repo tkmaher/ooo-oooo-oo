@@ -73,10 +73,12 @@ body {
 }
 
 .rotator {
+  width: auto;
   animation: rotate 10s linear infinite; 
 }
 
 .rotator-rev {
+  width: auto;
   animation: rotate 10s linear infinite; 
   animation-direction: reverse;
 }
