@@ -6,12 +6,12 @@ function DragCtx() {
   const files = [
     {
       type: "text",
-      src: "Performance at Blip --- Chicago 2025-12-12",
+      src: "Performance at Blip — Chicago 2025-12-12",
       class: "rotator-rev",
     },
     {
       type: "text",
-      src: "Performance at Blip --- Chicago 2025-12-12",
+      src: "Performance at Blip — Chicago 2025-12-12",
       class: "rotator",
     },
   ]
@@ -60,7 +60,6 @@ export default function Home() {
       >
         
         <br/><br/>
-        <img style={{maxWidth: "200px"}} src="https://www.shutterstock.com/image-vector/chinese-dragon-sketch-handdrawn-vector-600w-2558763545.jpg"/>
         {links.map(([title, link], index) => (
             <p key={index}>
               <a href={link}>{title}</a>

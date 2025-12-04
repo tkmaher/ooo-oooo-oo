@@ -22,7 +22,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Monaco', monospace;
+  font-size: 0.8em;
 }
 
 .faller {
@@ -73,12 +74,12 @@ body {
 }
 
 .rotator {
-  width: auto;
+  width: 500px;
   animation: rotate 10s linear infinite; 
 }
 
 .rotator-rev {
-  width: auto;
+  width: 500px;
   animation: rotate 10s linear infinite; 
   animation-direction: reverse;
 }
