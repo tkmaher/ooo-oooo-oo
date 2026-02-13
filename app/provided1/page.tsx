@@ -11,7 +11,7 @@ function DragCtx() {
     },
     {
       type: "text",
-      src: "Performance at Blip — Chicago 2025-12-12",
+      src: "Screening at Blip — Chicago 2026-02-06",
       class: "rotator",
     },
   ]
@@ -49,17 +49,7 @@ export default function Home() {
   return (
     <>
       <DragCtx/>
-      <div
-        style={{
-          width: "75%",
-          position: "relative",
-          marginTop: "5em",
-          marginLeft: "5em",
-          
-        }}
-      >
-        
-        <br/><br/>
+      <div className="menu">
         {links.map(([title, link], index) => (
             <p key={index}>
               <a href={link}>{title}</a>
