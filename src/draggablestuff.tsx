@@ -3,7 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import { DndContext } from "@dnd-kit/core";
 
 export function DraggableBox(props: {
-  x: number; y: number; id: number; text?: string; src: string; class?: string; flipping?: boolean;
+  x: number; y: number; id: number; text?: string; src: string; class?: string;
+  flipping?: boolean; zIndex: number;
 }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: props.id });
 
@@ -22,6 +23,7 @@ export function DraggableBox(props: {
     transform: `translate3d(${translate.x}px, ${translate.y}px, 0)`,
     cursor: "grab",
     perspective: "800px",
+    zIndex: props.zIndex,
   };
 
   return (
@@ -44,10 +46,12 @@ export function DragContainer(props: {
   flippingIndex?: number | null;
 }) {
   const [coords, setCoords] = useState<[number, number][]>([]);
+  const [zIndices, setZIndices] = useState<number[]>([]);
   const [tempDraggedPos, setTempDraggedPos] = useState({ x: 0, y: 0 });
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
   const [dragging, setDragging] = useState(false);
   const initialized = useRef(false);
+  const zCounter = useRef(1);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -55,11 +59,15 @@ export function DragContainer(props: {
     const w = window.innerWidth;
     const h = window.innerHeight;
     setCoords(props.files.map((_, i) => [w / 4 * (i % 4), h / 3 * Math.floor(i / 4)]));
+    setZIndices(props.files.map(() => 0));
   }, []);
 
   function handleDragStart(event: any) {
-    setActiveItemId(event.active.id);
-    document.getElementById(event.active.id.toString())?.style.setProperty("filter", "blur(0px)");
+    const id = event.active.id;
+    setActiveItemId(id);
+    zCounter.current += 1;
+    setZIndices((prev) => prev.map((z, i) => (i === id ? zCounter.current : z)));
+    document.getElementById(id.toString())?.style.setProperty("filter", "blur(0px)");
   }
 
   function handleDragMove(event: any) {
@@ -89,7 +97,8 @@ export function DragContainer(props: {
       {coords.map((item, i) => (
         <DraggableBox key={i} x={item[0]} y={item[1]} id={i} src={props.files[i].src}
           text={props.files[i].text} class={props.files[i].class}
-          flipping={props.flippingIndex === i} />
+          flipping={props.flippingIndex === i}
+          zIndex={zIndices[i] ?? 0} />
       ))}
     </DndContext>
   );

@@ -30,7 +30,12 @@ body {
 }
 
 .drag-active .elt-wrapper:hover .elt-container {
+  z-index: 1;
   scale: 1;
+}
+
+.drag-active  {
+  z-index: 9999;
 }
 
 .elt-container {
