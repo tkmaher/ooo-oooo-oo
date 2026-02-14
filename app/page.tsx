@@ -69,10 +69,13 @@ export default function DragCtx() {
         height: "100vh",
         maxHeight: "100%",
         position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <DragContainer files={displayed} flippingIndex={flippingIndex} />
-      <div className="menu">
+      <div className="menu home">
         <a  href="/provided1">View 3</a>
         </div>
         
