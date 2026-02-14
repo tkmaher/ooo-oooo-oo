@@ -1,3 +1,5 @@
+"use client";
+
 import { useDraggable } from "@dnd-kit/core";
 import { useEffect, useState, useRef } from "react";
 import { DndContext } from "@dnd-kit/core";

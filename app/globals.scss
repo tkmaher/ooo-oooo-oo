@@ -22,7 +22,7 @@ body {
   top: 4em;
   text-align: justify;
   left: 4em;
-  width: calc(100vw - 8em);
+  max-width: calc(100vw - 8em);
   position: absolute;
   padding-bottom: 6em;
 }
