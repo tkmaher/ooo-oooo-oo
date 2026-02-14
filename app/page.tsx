@@ -68,7 +68,6 @@ export default function DragCtx() {
         width: "100%",
         height: "100vh",
         maxHeight: "100%",
-        overflow: (window.innerHeight > window.innerWidth) ? "auto" : "hidden", 
         position: "relative",
       }}
     >
