@@ -17,6 +17,7 @@ const ALL_FILES = [
   { src: "/imgs/11.png" },
   { src: "/imgs/12.png" },
   { src: "/imgs/13.png" },
+  { src: "/imgs/14.JPEG" },
 ];
 
 const DISPLAY_COUNT = 12;
@@ -67,12 +68,12 @@ export default function DragCtx() {
         width: "100%",
         height: "100vh",
         maxHeight: "100%",
-        overflow: "hidden",
+        overflow: (window.innerHeight > window.innerWidth) ? "auto" : "hidden", 
         position: "relative",
       }}
     >
-      <a className="menu" href="/provided1">View 3</a>
       <DragContainer files={displayed} flippingIndex={flippingIndex} />
+      <a className="menu" href="/provided1">View 3</a>
     </div>
   );
 }

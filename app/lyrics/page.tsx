@@ -14,7 +14,6 @@ export default function DragCtx() {
         width: "100%",
         overflow: "hidden", // important to prevent page expansion
         position: "relative",
-        padding: "15em",
         textAlign: "center"
       }}
     >

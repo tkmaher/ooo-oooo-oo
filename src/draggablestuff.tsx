@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { DndContext } from "@dnd-kit/core";
 
 export function DraggableBox(props: {
-  x: number; y: number; id: number; text?: string; src: string; class?: string;
+  x: number; y: number; id: number; text?: string; src?: string; class?: string;
   flipping?: boolean; zIndex: number;
 }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: props.id });
@@ -18,7 +18,7 @@ export function DraggableBox(props: {
     top: 0,
     left: 0,
     height: window.innerHeight / 3,
-    width: window.innerWidth / 4,
+    width: (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerWidth / 4),
     pointerEvents: isDragging ? "none" : "auto",
     transform: `translate3d(${translate.x}px, ${translate.y}px, 0)`,
     cursor: "grab",
@@ -28,21 +28,35 @@ export function DraggableBox(props: {
 
   return (
     <div className="elt-wrapper" style={wrapperStyle}>
-      <img
-        className={`${props.class ?? "moving-elt"} elt-container ${props.flipping ? "flip-animation" : ""}`}
-        ref={setNodeRef}
-        style={{ filter: "blur(1px)", userSelect: "none" }}
-        {...listeners}
-        {...attributes}
-        id={props.id.toString()}
-        src={props.src}
-      />
+      {props.text ? (
+        <div
+          className={`${props.class ?? "moving-elt"} elt-container elt-text ${props.flipping ? "flip-animation" : ""}`}
+          ref={setNodeRef}
+          style={{ filter: "blur(1px)", userSelect: "none" }}
+          {...listeners}
+          {...attributes}
+          id={props.id.toString()}
+        >
+          {props.text}
+          <img src={props.src}/>
+        </div>
+      ) : (
+        <img
+          className={`${props.class ?? "moving-elt"} elt-container ${props.flipping ? "flip-animation" : ""}`}
+          ref={setNodeRef}
+          style={{ filter: "blur(1px)", userSelect: "none" }}
+          {...listeners}
+          {...attributes}
+          id={props.id.toString()}
+          src={props.src}
+        />
+      )}
     </div>
   );
 }
 
 export function DragContainer(props: {
-  files: { text?: string; src: string; class?: string }[];
+  files: { text?: string; src?: string; class?: string }[];
   flippingIndex?: number | null;
 }) {
   const [coords, setCoords] = useState<[number, number][]>([]);
@@ -58,7 +72,11 @@ export function DragContainer(props: {
     initialized.current = true;
     const w = window.innerWidth;
     const h = window.innerHeight;
-    setCoords(props.files.map((_, i) => [w / 4 * (i % 4), h / 3 * Math.floor(i / 4)]));
+    if (window.innerHeight > window.innerWidth) {
+      setCoords(props.files.map((_, i) => [0, h / 3 * i]));
+    } else {
+      setCoords(props.files.map((_, i) => [w / 4 * (i % 4), h / 3 * Math.floor(i / 4)]));
+    }
     setZIndices(props.files.map(() => 0));
   }, []);
 
@@ -95,10 +113,17 @@ export function DragContainer(props: {
   return (
     <DndContext onDragStart={handleDragStart} onDragMove={handleDragMove} onDragEnd={handleDragEnd}>
       {coords.map((item, i) => (
-        <DraggableBox key={i} x={item[0]} y={item[1]} id={i} src={props.files[i].src}
-          text={props.files[i].text} class={props.files[i].class}
+        <DraggableBox 
+          key={i} 
+          x={item[0]} 
+          y={item[1]} 
+          id={i} 
+          src={props.files[i].src}
+          text={props.files[i].text} 
+          class={props.files[i].class}
           flipping={props.flippingIndex === i}
-          zIndex={zIndices[i] ?? 0} />
+          zIndex={zIndices[i] ?? 0} 
+        />
       ))}
     </DndContext>
   );

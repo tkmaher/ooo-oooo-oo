@@ -5,14 +5,14 @@ import { DragContainer } from "@/src/draggablestuff";
 function DragCtx() {
   const files = [
     {
-      type: "text",
-      src: "Performance at Blip — Chicago 2025-12-12",
+      text: "Performance at Blip — Chicago 2025-12-12",
       class: "rotator-rev",
+      src: "/shows/1.JPG"
     },
     {
-      type: "text",
-      src: "Screening at Blip — Chicago 2026-02-06",
+      text: "Screening at Blip — Chicago 2026-02-06",
       class: "rotator",
+      src: "/shows/2.png"
     },
   ]
 
@@ -26,8 +26,7 @@ function DragCtx() {
         height: "100vh",
         maxHeight: "100%",
         overflow: "hidden", // important to prevent page expansion
-        padding: "10em",
-        position: "absolute",
+        position: "relative",
       }}
     >
        
@@ -39,10 +38,10 @@ function DragCtx() {
 export default function Home() {
 
   const links = [
-    ["Home", "/"],
     ["Album", "/"],
     ["CDs", "/merchandise"],
     ["Info", "/lyrics"],
+    ["Back", "/"],
   ]
   
 
