@@ -73,7 +73,10 @@ export default function DragCtx() {
       }}
     >
       <DragContainer files={displayed} flippingIndex={flippingIndex} />
-      <a className="menu" href="/provided1">View 3</a>
+      <div className="menu">
+        <a  href="/provided1">View 3</a>
+        </div>
+        
     </div>
   );
 }

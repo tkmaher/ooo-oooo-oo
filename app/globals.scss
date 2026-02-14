@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -20,9 +19,12 @@ body {
 }
 
 .menu {
+  top: 4em;
+  text-align: justify;
+  left: 4em;
+  width: calc(100vw - 8em);
   position: absolute;
-  top: 3em;
-  left: 3em;
+  padding-bottom: 6em;
 }
 
 .elt-wrapper:hover:not(.drag-active .elt-wrapper) .elt-container {
@@ -101,7 +103,7 @@ a {
   background-color: var(--background);
 }
 
-p:hover {
+a:hover {
   text-decoration: underline;
   
 }
