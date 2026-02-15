@@ -56,7 +56,7 @@ body {
   position: relative;
   img {
     transition: opacity 0.5s ease-in-out !important;
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     
     top: 0;
@@ -70,7 +70,7 @@ body {
 
 .elt-text:hover {
   img {
-    opacity: 0;
+    opacity: 1;
   }
 }
 
@@ -88,6 +88,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.spacer {
+  pointer-events: none;
+  cursor: default;
 }
 
 

@@ -21,20 +21,20 @@ export function DraggableBox(props: {
     left: 0,
     height: window.innerHeight / 3,
     width: (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerWidth / 4),
-    pointerEvents: isDragging ? "none" : "auto",
     transform: `translate3d(${translate.x}px, ${translate.y}px, 0)`,
     cursor: "grab",
     perspective: "800px",
     zIndex: props.zIndex,
   };
+  console.log("src:",props.src);
 
   return (
-    <div className="elt-wrapper" style={wrapperStyle}>
-      {props.text ? (
+    <div className={`elt-wrapper ${props.class}`} style={wrapperStyle}>
+      {props.text ? 
         <div
           className={`${props.class ?? "moving-elt"} elt-container elt-text ${props.flipping ? "flip-animation" : ""}`}
           ref={setNodeRef}
-          style={{ filter: "blur(1px)", userSelect: "none" }}
+          style={{ filter: "blur(15px)", userSelect: "none" }}
           {...listeners}
           {...attributes}
           id={props.id.toString()}
@@ -42,7 +42,7 @@ export function DraggableBox(props: {
           {props.text}
           <img src={props.src}/>
         </div>
-      ) : (
+       : (
         <img
           className={`${props.class ?? "moving-elt"} elt-container ${props.flipping ? "flip-animation" : ""}`}
           ref={setNodeRef}

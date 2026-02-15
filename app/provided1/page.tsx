@@ -5,14 +5,32 @@ import { DragContainer } from "@/src/draggablestuff";
 function DragCtx() {
   const files = [
     {
-      text: "Performance at Blip — Chicago 2025-12-12",
-      class: "rotator-rev",
-      src: "/shows/1.JPG"
+      text: "a",
+      class: "spacer",
+    },
+    {
+      text: "a",
+      class: "spacer",
+    },
+    {
+      text: "a",
+      class: "spacer",
+    },
+    {
+      text: "a",
+      class: "spacer",
+    },
+    {
+      text: "a",
+      class: "spacer",
     },
     {
       text: "Screening at Blip — Chicago 2026-02-06",
-      class: "rotator",
       src: "/shows/2.png"
+    },
+    {
+      text: "Performance at Blip — Chicago 2025-12-12",
+      src: "/shows/1.JPG"
     },
   ]
 
