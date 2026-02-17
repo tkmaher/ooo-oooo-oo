@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import { DragContainer } from "@/src/draggablestuff";
 
@@ -62,17 +63,26 @@ export default function Home() {
     ["Contact", "mailto:dust54089@gmail.com"],
     ["Back", "/"],
   ]
+
+  const [open, setOpen] = useState(false);
   
 
   return (
     <>
       <DragCtx/>
       <div className="menu">
-        {links.map(([title, link], index) => (
-            <p key={index}>
-              <a href={link}>{title}</a>
-            </p>
-          ))}
+        
+        <a onClick={() => setOpen(open => !open)}>Album</a>
+        <div hidden={!open} style={{pointerEvents: "auto"}}>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=9YC6Ofhi17FDins_&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+        </div>
+
+        <a href="/merchandise">Merchandise</a>
+        <a href="/lyrics">Info</a>
+        <a href="mailto:dust54089@gmail.com">Contact</a>
+        <br/>
+        <a href="/">Back</a>
+
       </div>
     </>
   );

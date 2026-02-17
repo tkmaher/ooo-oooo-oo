@@ -19,21 +19,23 @@ body {
 }
 
 .menu {
-  top: 4em;
+  top: 1em;
   text-align: justify;
-  left: 4em;
-  max-width: calc(100vw - 8em);
+  left: 1em;
+  max-width: calc(100vw - 2em);
   position: absolute;
   padding-bottom: 6em;
   pointer-events: none;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
 }
 
 .home {
   position: fixed;
-  width: 100%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   top: 50%;
-  text-align: center;
+  left: 50%;
 }
 
 .elt-wrapper:hover:not(.drag-active .elt-wrapper) .elt-container {
@@ -117,7 +119,9 @@ body {
 
 a {
   background-color: var(--background);
+  width: fit-content;
   pointer-events: all;
+  cursor: pointer;
 }
 
 a:hover {
