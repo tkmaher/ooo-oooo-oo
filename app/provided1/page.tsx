@@ -5,23 +5,23 @@ import { DragContainer } from "@/src/draggablestuff";
 function DragCtx() {
   const files = [
     {
-      text: "a",
+      text: " ",
       class: "spacer",
     },
     {
-      text: "a",
+      text: " ",
       class: "spacer",
     },
     {
-      text: "a",
+      text: " ",
       class: "spacer",
     },
     {
-      text: "a",
+      text: " ",
       class: "spacer",
     },
     {
-      text: "a",
+      text: " ",
       class: "spacer",
     },
     {
@@ -43,7 +43,7 @@ function DragCtx() {
         width: "100%",
         height: "100vh",
         maxHeight: "100%",
-        overflow: "hidden", // important to prevent page expansion
+        overflowX: "hidden", // important to prevent page expansion
         position: "relative",
       }}
     >
@@ -59,6 +59,7 @@ export default function Home() {
     ["Album", "/"],
     ["CDs", "/merchandise"],
     ["Info", "/lyrics"],
+    ["Contact", "mailto:dust54089@gmail.com"],
     ["Back", "/"],
   ]
   
