@@ -5,10 +5,11 @@ import { useEffect, useState, useRef } from "react";
 import { DndContext } from "@dnd-kit/core";
 
 export function DraggableBox(props: {
-  x: number; y: number; id: number; text?: string; src?: string; class?: string;
+  x: number; y: number; id: number; text?: string; src?: string; class?: string; href?: string;
   flipping?: boolean; zIndex: number;
 }) {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: props.id });
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: props.id });
+  const hasDragged = useRef(false);
 
   const translate = {
     x: props.x + (transform?.x ?? 0),
@@ -20,33 +21,40 @@ export function DraggableBox(props: {
     top: 0,
     left: 0,
     height: window.innerHeight / 3,
-    width: (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerWidth / 4),
+    width: window.innerHeight > window.innerWidth ? window.innerWidth : window.innerWidth / 4,
     transform: `translate3d(${translate.x}px, ${translate.y}px, 0)`,
     cursor: "grab",
     perspective: "800px",
     zIndex: props.zIndex,
   };
-  console.log("src:",props.src);
+
+  const containerClass = `${props.class ?? "moving-elt"} elt-container ${props.flipping ? "flip-animation" : ""}`;
 
   return (
-    <div className={`elt-wrapper ${props.class}`} style={wrapperStyle}>
-      {props.text ? 
+    <div
+      className={`elt-wrapper ${props.class}`}
+      style={wrapperStyle}
+      onMouseDown={() => { hasDragged.current = false; }}
+      onMouseMove={() => { hasDragged.current = true; }}
+      onMouseUp={() => { if (!hasDragged.current && props.href) window.open(props.href); }}
+    >
+      {props.text ? (
         <div
-          className={`${props.class ?? "moving-elt"} elt-container elt-text ${props.flipping ? "flip-animation" : ""}`}
+          className={`${containerClass} elt-text`}
           ref={setNodeRef}
-          style={{ filter: "blur(15px)", userSelect: "none" }}
+          style={{ userSelect: "none" }}
           {...listeners}
           {...attributes}
           id={props.id.toString()}
         >
           {props.text}
-          <img src={props.src}/>
+          <img src={props.src} />
         </div>
-       : (
+      ) : (
         <img
-          className={`${props.class ?? "moving-elt"} elt-container ${props.flipping ? "flip-animation" : ""}`}
+          className={containerClass}
           ref={setNodeRef}
-          style={{ filter: "blur(1px)", userSelect: "none" }}
+          style={{ userSelect: "none" }}
           {...listeners}
           {...attributes}
           id={props.id.toString()}
@@ -58,7 +66,7 @@ export function DraggableBox(props: {
 }
 
 export function DragContainer(props: {
-  files: { text?: string; src?: string; class?: string }[];
+  files: { text?: string; src?: string; class?: string; href?: string }[];
   flippingIndex?: number | null;
 }) {
   const [coords, setCoords] = useState<[number, number][]>([]);
@@ -74,11 +82,11 @@ export function DragContainer(props: {
     initialized.current = true;
     const w = window.innerWidth;
     const h = window.innerHeight;
-    if (window.innerHeight > window.innerWidth) {
-      setCoords(props.files.map((_, i) => [0, h / 3 * i]));
-    } else {
-      setCoords(props.files.map((_, i) => [w / 4 * (i % 4), h / 3 * Math.floor(i / 4)]));
-    }
+    setCoords(props.files.map((_, i) =>
+      window.innerHeight > window.innerWidth
+        ? [0, h / 3 * i]
+        : [w / 4 * (i % 4), h / 3 * Math.floor(i / 4)]
+    ));
     setZIndices(props.files.map(() => 0));
   }, []);
 
@@ -87,7 +95,7 @@ export function DragContainer(props: {
     setActiveItemId(id);
     zCounter.current += 1;
     setZIndices((prev) => prev.map((z, i) => (i === id ? zCounter.current : z)));
-    document.getElementById(id.toString())?.style.setProperty("filter", "blur(0px)");
+    document.getElementById(id.toString())?.classList.add("unblurred");
   }
 
   function handleDragMove(event: any) {
@@ -105,6 +113,7 @@ export function DragContainer(props: {
     setCoords((prev) =>
       prev.map((coord, i) => (i === activeItemId ? [tempDraggedPos.x, tempDraggedPos.y] : coord))
     );
+    document.getElementById(activeItemId.toString())?.classList.remove("unblurred");
     setActiveItemId(null);
     document.body.classList.remove("drag-active");
     setDragging(false);
@@ -115,16 +124,17 @@ export function DragContainer(props: {
   return (
     <DndContext onDragStart={handleDragStart} onDragMove={handleDragMove} onDragEnd={handleDragEnd}>
       {coords.map((item, i) => (
-        <DraggableBox 
-          key={i} 
-          x={item[0]} 
-          y={item[1]} 
-          id={i} 
+        <DraggableBox
+          key={i}
+          x={item[0]}
+          y={item[1]}
+          id={i}
           src={props.files[i].src}
-          text={props.files[i].text} 
+          text={props.files[i].text}
           class={props.files[i].class}
+          href={props.files[i].href}
           flipping={props.flippingIndex === i}
-          zIndex={zIndices[i] ?? 0} 
+          zIndex={zIndices[i] ?? 0}
         />
       ))}
     </DndContext>

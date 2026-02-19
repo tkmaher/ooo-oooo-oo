@@ -27,7 +27,8 @@ function DragCtx() {
     },
     {
       text: "Screening at Blip — Chicago 2026-02-06",
-      src: "/shows/2.png"
+      src: "/shows/2.png",
+      href: "https://www.youtube.com/watch?v=FQTc_Ppz8A4&si=9YC6Ofhi17FDins_"
     },
     {
       text: "Performance at Blip — Chicago 2025-12-12",
@@ -74,7 +75,7 @@ export default function Home() {
         
         <a onClick={() => setOpen(open => !open)}>Album</a>
         <div hidden={!open} style={{pointerEvents: "auto"}}>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=9YC6Ofhi17FDins_&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          bandcamp goes here
         </div>
 
         <a href="/merchandise">Merchandise</a>
