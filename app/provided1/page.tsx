@@ -91,7 +91,7 @@ export default function Home() {
         <a href="mailto:dust54089@gmail.com">Contact</a>
         <a onClick={() => setMovieOpen(open => !open)}>Movie</a>
         <div hidden={!movieOpen} style={{pointerEvents: "auto"}} className="bandcamp-container">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=dRiiDmMccnwaazWp&modestbranding=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=dRiiDmMccnwaazWp&modestbranding=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         </div>
         <br/>
         <a href="/">Back</a>
