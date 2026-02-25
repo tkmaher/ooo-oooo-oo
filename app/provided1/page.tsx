@@ -75,10 +75,10 @@ export default function Home() {
         
         <a onClick={() => setOpen(open => !open)}>Album</a>
         <div hidden={!open} style={{pointerEvents: "auto"}}>
-          bandcamp goes here
+          <iframe style={{border: 0, width: "400px", height: "737px"}} src="https://bandcamp.com/EmbeddedPlayer/album=2774788724/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/tracklist=true/tracks=2091903469,361906268/esig=c773ee85d69314ca94dccfafc8a355e1/" seamless><a href="https://view3.bandcamp.com/album/paper">Paper by View 3</a></iframe>
         </div>
 
-        <a href="/merchandise">Merchandise</a>
+        <a href="https://view3.bandcamp.com/merch" target="_blank">Merchandise</a>
         <a href="/lyrics">Info</a>
         <a href="mailto:dust54089@gmail.com">Contact</a>
         <br/>
