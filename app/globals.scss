@@ -5,18 +5,12 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Monaco', monospace;
+  font-family: 'Helvetica';
   font-size: 0.8em;
+  overflow-x: hidden;
 }
 
 .menu {
@@ -27,7 +21,6 @@ body {
   padding-bottom: 6em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   text-align: justify;
   pointer-events: none;
 }
@@ -41,14 +34,19 @@ body {
 
 .elt-container {
   width: 100%;
-  height: 100%;
+  height: 0;
   object-fit: cover;
   filter: blur(15px);
-  transition: filter 10s ease-in-out, scale 0.3s ease-in-out;
+  transition: filter 10s ease-in-out, scale 0.3s ease-in-out, height 0.3s ease-in-out;
+
+  &:hover {
+    height: 100%;
+  }
 
   &.unblurred {
     filter: blur(0px);
     transition: filter 0.5s ease-in-out, scale 0.3s ease-in-out;
+    
   }
 }
 
@@ -88,13 +86,13 @@ img.elt-container {
 
   img {
     position: absolute;
-    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease-in-out;
+    z-index: -1;
   }
 
   &:hover img {
@@ -134,3 +132,21 @@ a {
     margin-left: 2em;
   }
 }
+
+#mobile {
+  display: none;
+}
+#desktop {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  #mobile {
+    display: block;
+  }
+  #desktop {
+    display: none;
+  }
+}
+
+

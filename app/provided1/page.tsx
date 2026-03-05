@@ -11,7 +11,9 @@ function DragCtx() {
     },
     {
       text: "Paper release party — 2026-06-03",
-      src: "/shows/3.png"
+      src: "/shows/3.png",
+      href: "https://view3.bandcamp.com/album/paper"
+
     },
     {
       text: " ",
@@ -32,7 +34,8 @@ function DragCtx() {
     },
     {
       text: "Performance at Blip — 2025-12-12",
-      src: "/shows/1.JPG"
+      src: "/shows/1.JPG",
+      href: "https://blippp.org"
     },
 
   ]
@@ -79,7 +82,14 @@ export default function Home() {
         <a onClick={() => setAlbumOpen(open => !open)}>Album</a>
         <div hidden={!albumOpen} style={{pointerEvents: "auto"}} className="bandcamp-container">
           {albumOpen && (
-            <iframe style={{border: 0, width: "400px", height: "737px"}} src="https://bandcamp.com/EmbeddedPlayer/album=2774788724/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/tracklist=true/tracks=2091903469,361906268/esig=c773ee85d69314ca94dccfafc8a355e1/" seamless><a href="https://view3.bandcamp.com/album/paper">Paper by View 3</a></iframe>
+            <>
+              <div id="mobile">
+              <iframe style={{border: 0, width: "350", height: "737px"}} src="https://bandcamp.com/EmbeddedPlayer/album=2774788724/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/tracklist=true/tracks=2091903469,361906268/esig=c773ee85d69314ca94dccfafc8a355e1/" seamless><a href="https://view3.bandcamp.com/album/paper">Paper by View 3</a></iframe>
+              </div>
+              <div id="desktop">
+              <iframe style={{border: 0, width: "400px", height: "737px"}} src="https://bandcamp.com/EmbeddedPlayer/album=2774788724/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/tracklist=true/tracks=2091903469,361906268/esig=c773ee85d69314ca94dccfafc8a355e1/" seamless><a href="https://view3.bandcamp.com/album/paper">Paper by View 3</a></iframe>
+              </div>
+            </>
           )}
           <a href="https://view3.bandcamp.com/album/paper" target="_blank">Bandcamp</a>
           <a href="https://www.ninaprotocol.com/hubs/view3" target="_blank">Nina</a>
@@ -90,7 +100,12 @@ export default function Home() {
         <a href="mailto:dust54089@gmail.com">Contact</a>
         <a onClick={() => setMovieOpen(open => !open)}>Movie</a>
         <div hidden={!movieOpen} style={{pointerEvents: "auto"}} className="bandcamp-container">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=dRiiDmMccnwaazWp&modestbranding=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          <div id="mobile">
+            <iframe width="350" height="190" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=dRiiDmMccnwaazWp&modestbranding=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          </div>
+          <div id="desktop">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/FQTc_Ppz8A4?si=dRiiDmMccnwaazWp&modestbranding=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          </div>
         </div>
         <br/>
         <a href="/">Back</a>
