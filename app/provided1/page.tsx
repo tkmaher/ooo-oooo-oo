@@ -92,7 +92,6 @@ export default function Home() {
             </>
           )}
           <a href="https://view3.bandcamp.com/album/paper" target="_blank">Bandcamp</a>
-          <a href="https://www.ninaprotocol.com/hubs/view3" target="_blank">Nina</a>
         </div>
 
         <a href="https://view3.bandcamp.com/merch" target="_blank">Merchandise</a>

@@ -1,84 +1,89 @@
 "use client";
 
-import { DragContainer } from "@/src/draggablestuff";
-import { useEffect, useState, useCallback, useRef } from "react";
+import ImageColumn from "@/components/imagecolumn";
+import { useCallback, useState } from "react";
+import Info from "./lyrics/page";
 
-const ALL_FILES = [
-  { src: "/imgs/1.png" },
-  { src: "/imgs/2.png" },
-  { src: "/imgs/3.PNG", class: "tall-img" },
-  { src: "/imgs/4.png" },
-  { src: "/imgs/5.gif" },
-  { src: "/imgs/6.png", class: "wide-img" },
-  { src: "/imgs/7.png" },
-  { src: "/imgs/8.png" },
-  { src: "/imgs/9.png" },
-  { src: "/imgs/10.webp" },
-  { src: "/imgs/11.png" },
-  { src: "/imgs/12.png" },
-  { src: "/imgs/13.png" },
-  { src: "/imgs/14.JPEG" },
-];
-
-const DISPLAY_COUNT = 12;
-const FLIP_INTERVAL = 3000;
-const FLIP_HALFWAY = 400; // ms until the card is "edge-on" and we swap the src
 
 export default function DragCtx() {
-  const [displayed, setDisplayed] = useState(ALL_FILES.slice(0, DISPLAY_COUNT));
-  const [flippingIndex, setFlippingIndex] = useState<number | null>(null);
-  const displayedRef = useRef(displayed);
-  displayedRef.current = displayed;
 
-  const getHiddenFiles = useCallback(() => {
-    const displayedSrcs = new Set(displayedRef.current.map((f) => f.src));
-    return ALL_FILES.filter((f) => !displayedSrcs.has(f.src));
-  }, []);
+  const [expandedSrc, setExpandedSrc] = useState<string | null>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const hidden = getHiddenFiles();
-      if (hidden.length === 0) return;
+  const setOpen = useCallback((newSrc: string) => {
+    if (expandedSrc === newSrc) {
+      setExpandedSrc(null);
+    } else {
+      setExpandedSrc(newSrc);
+    }
+  }, [expandedSrc]);
 
-      const randomIndex = Math.floor(Math.random() * DISPLAY_COUNT);
-      const randomHidden = hidden[Math.floor(Math.random() * hidden.length)];
 
-      // Start flip animation
-      setFlippingIndex(randomIndex);
+  const ALL_FILES = [
+    { 
+      src: "/imgs/1.png",
+      title: "Album"
+    },
+    { 
+      src: "/imgs/2.png",
+      title: "Upcoming Shows"
+    },
+    { 
+      src: "/imgs/3.PNG",
+      title: "Old Shows"
+    },
+    { 
+      src: "/imgs/4.png", 
+      title: "Info",
+      body: <Info/>
+    },
+    { 
+      src: "/imgs/5.gif",    
+      title: "Movie"
+    },
+    { src: "/imgs/6.png",
+      title: "Merchandise"
+    },
+    { src: "/imgs/7.png", 
+      title: "Contact"
+    },
+    { src: "/imgs/8.png",
+      title: "Album"
+    },
+    { src: "/imgs/9.png",
+      title: "Album"
+    },
+    { src: "/imgs/10.webp",
+      title: "Album"
+    },
+    { src: "/imgs/11.png",
+      title: "Album"
+    },
+    { src: "/imgs/12.png",
+      title: "Album"
+    },
+    { src: "/imgs/13.png",
+      title: "Album"
+    },
+    { src: "/imgs/14.JPEG",
+      title: "Bandcamp"
+    },
+  ];
 
-      // Swap image at the halfway point (when card is edge-on)
-      setTimeout(() => {
-        setDisplayed((prev) =>
-          prev.map((file, i) => (i === randomIndex ? randomHidden : file))
-        );
-      }, FLIP_HALFWAY);
-
-      // Clear flipping state after animation completes
-      setTimeout(() => {
-        setFlippingIndex(null);
-      }, FLIP_HALFWAY * 2);
-    }, FLIP_INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [getHiddenFiles]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100vh",
-        maxHeight: "100%",
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <DragContainer files={displayed} flippingIndex={flippingIndex} />
-      <div className="menu home">
-        <a  href="/provided1">View 3</a>
-        </div>
-        
+    <div className="total-container">
+      <div className="column-container">
+        {ALL_FILES.map((file, index) => (
+          <ImageColumn 
+            src={file.src} 
+            key={index} 
+            expanded={file.src === expandedSrc} 
+            callback={setOpen} 
+            title={file.title}
+            body={file.body}
+          />
+        ))}
+      </div>
     </div>
   );
 }

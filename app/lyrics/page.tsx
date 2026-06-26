@@ -1,14 +1,6 @@
-"use client";
 
-import { useState, useEffect } from "react";
-import { DndContext } from "@dnd-kit/core";
-import { DraggableBox } from "@/src/draggablestuff"
-
-export default function DragCtx() {
-  
-
+export default function Info() {
   return (
-    
     <div
      className="menu"
     >
