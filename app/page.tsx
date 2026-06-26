@@ -1,8 +1,8 @@
 "use client";
 
 import ImageColumn from "@/components/imagecolumn";
+import Info from "@/components/info";
 import { useCallback, useState } from "react";
-import Info from "./lyrics/page";
 
 
 export default function DragCtx() {

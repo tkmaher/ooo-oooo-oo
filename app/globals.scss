@@ -9,17 +9,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Helvetica';
-  font-size: 1.2em;
-  //overflow: hidden;
-}
-
-.title {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background-color:  #fff;
-  width: 100dvw;
+  font-size: 1em;
+  overflow: hidden;
 }
 
 .column-container {
@@ -37,27 +28,34 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  rotate: -20deg;
+  z-index: 2; /* force it above the image, explicitly */
+  rotate: -90deg;
   transform-origin: left top;
   width: auto;
   word-break: keep-all;
   white-space: nowrap;
   text-align: left;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--foreground);
   color: white;
-  text-align: center;
   padding: 0 0.5em;
-  z-index: 9999;
+  font-size: 1.2em;
 }
 
 .image-column {
+  position: relative;
+  isolation: isolate; /* contains the stacking context cleanly */
+
   img {
+    position: relative;
+    z-index: 1; /* explicit, lower than the title */
     height: 100dvh;
     max-height: 100%;
     transition: filter 0.3s ease;
   }
+
   filter: grayscale(100%) contrast(50) brightness(0.8);
   cursor: pointer;
+
   @media (hover: hover) {
     img:hover {
       filter: grayscale(0%) contrast(0.8) brightness(0.8);
@@ -67,10 +65,7 @@ body {
   img:active {
     filter: grayscale(0%) contrast(2) brightness(0.8);
   }
-  z-index: 0;
-
 }
-
 .selected {
   filter: grayscale(0%) contrast(2) brightness(0.8);
 }
@@ -80,12 +75,12 @@ body {
   transition: width 0.2s linear, opacity 0.2s ease;
   align-self: flex-start;
   opacity: 0;
-
+  height: 100dvh;
+  overflow-y: auto;
+  background-color: var(--background);
 }
 
 .expanded-content {
   width: 5000px;
   opacity: 1;
-  height: 100dvh;
-  overflow-y: auto;
 }

@@ -20,7 +20,7 @@ export default function ImageColumn({
                 className={expanded ? "image-column selected" : "image-column"}
                 onClick={() => callback(src)}
             >
-                <div className="image-title">{title}</div>
+                <div className="image-title" >{title}</div>
                 <Image src={src} fetchPriority="high" alt="Image" width={300} height={800} />
             </div>
             <div 

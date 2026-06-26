@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-import { DragContainer } from "@/src/draggablestuff";
 
 function DragCtx() {
   const files = [
@@ -54,7 +53,6 @@ function DragCtx() {
       }}
     >
        
-        <DragContainer files={files}/>
     </div>
   );
 }
