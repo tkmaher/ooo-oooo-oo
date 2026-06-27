@@ -1,11 +1,11 @@
 "use client";
 
 import ImageColumn from "@/components/imagecolumn";
-import Info from "@/components/info";
+import { Merch, Info, Movie, AlbumPaper, Events} from "@/components/components";
 import { useCallback, useState } from "react";
 
 
-export default function DragCtx() {
+export default function Main() {
 
   const [expandedSrc, setExpandedSrc] = useState<string | null>(null);
 
@@ -21,15 +21,18 @@ export default function DragCtx() {
   const ALL_FILES = [
     { 
       src: "/imgs/1.png",
-      title: "Album"
+      title: "Album",
+      body: <AlbumPaper/>
     },
     { 
       src: "/imgs/2.png",
-      title: "Upcoming Shows"
+      title: "Upcoming events",
+      body: <Events isPast={false}/>
     },
     { 
       src: "/imgs/3.PNG",
-      title: "Old Shows"
+      title: "Past events",
+      body: <Events isPast={true}/>
     },
     { 
       src: "/imgs/4.png", 
@@ -38,10 +41,12 @@ export default function DragCtx() {
     },
     { 
       src: "/imgs/5.gif",    
-      title: "Movie"
+      title: "Movie",
+      body: <Movie/>
     },
     { src: "/imgs/6.png",
-      title: "Merchandise"
+      title: "Merchandise",
+      body: <Merch/>
     },
     { src: "/imgs/7.png", 
       title: "Contact"
