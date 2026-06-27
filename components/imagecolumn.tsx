@@ -6,19 +6,27 @@ export default function ImageColumn({
     expanded,
     callback,
     title,
-    body
+    body,
+    link
 }: {
     src: string,
     expanded: boolean,
     callback: (newSrc: string) => void,
     title?: string,
-    body?: ReactNode
+    body?: ReactNode,
+    link?: string
 }) {
     return (
         <>
             <div 
                 className={expanded ? "image-column selected" : "image-column"}
-                onClick={() => callback(src)}
+                onClick={() => {
+                    if (link) {
+                        window.open(link, "_blank");
+                        return;
+                    }
+                    callback(src);
+                }}
             >
                 <div className="image-title" >{title}</div>
                 <Image src={src} fetchPriority="high" alt="Image" width={300} height={800} />

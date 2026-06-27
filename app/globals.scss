@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --foreground: #979797;
-  --background: #171717;
+  --background: #cfcfcf;
+  --foreground: #171717;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
   color: var(--foreground);
   font-family: 'Helvetica';
   font-size: 1em;
-  overflow: hidden;
+  //overflow: hidden;
   font-weight: 100;
 }
 
@@ -25,6 +25,8 @@ body {
 }
 
 
+
+
 .image-title {
   position: absolute;
   bottom: 0;
@@ -36,10 +38,10 @@ body {
   word-break: keep-all;
   white-space: nowrap;
   text-align: left;
-  border: 1px solid var(--background);
-  color: var(--background);
+  border: 1px solid var(--foreground);
+  color: var(--foreground);
   font-size: 1.2em;
-  
+  background: var(--background);
 
 }
 
@@ -76,7 +78,7 @@ body {
 
 .content-body {
   width: 0;
-  transition: width 0.2s linear, opacity 0.2s ease, padding 0.2s ease;
+  transition: width 0.2s linear, height 0.2s linear, opacity 0.2s ease, padding 0.2s ease;
   align-self: flex-start;
   opacity: 0;
   height: 100dvh;
@@ -101,11 +103,14 @@ body {
   align-items: center;
   overflow-y: auto;
   img {
-    padding: 2.5em;
+    width: 100%;
   }
   & > * {
     width: 100%;
+  }
+  * + * {
     border-top: 1px solid var(--foreground);
+
   }
 }
 
@@ -116,15 +121,52 @@ body {
   height: 100dvh;
   width: 100%;
   .event {
-    flex-grow: 1;
     width: 100%;
-    border-top: 1px solid var(--foreground);
     display: flex;
     align-items: flex-end;
-
+    justify-content: space-between;
+    border-bottom: 1px solid var(--foreground);
   }
+  
 }
 
 a {
-  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .column-container {
+    flex-direction: column;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .image-column {
+    min-height: 0; // <-- removes the aspect-ratio-derived auto min that was locking height
+    flex-shrink: 1;
+
+    img {
+      width: 100dvw;
+      height: auto;
+      min-height: 0; // <-- same fix on the img itself, belt-and-suspenders
+      max-height: 100%;
+    }
+  }
+
+  .image-title {
+    rotate: 0deg;
+  }
+
+  .content-body {
+    height: 0;
+    width: 100%;
+    min-height: 0; // <-- ensures it can also be the thing that shrinks to 0 when not expanded
+  }
+
+  .expanded-content {
+    height: 5000px;
+    width: 100%;
+    opacity: 1;
+  }
 }

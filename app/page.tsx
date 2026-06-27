@@ -49,9 +49,10 @@ export default function Main() {
       body: <Merch/>
     },
     { src: "/imgs/7.png", 
-      title: "Contact"
+      title: "Contact",
+      link: "mailto:dust54089@gmail.com"
     },
-    { src: "/imgs/8.png",
+    /*{ src: "/imgs/8.png",
       title: "Album"
     },
     { src: "/imgs/9.png",
@@ -68,9 +69,10 @@ export default function Main() {
     },
     { src: "/imgs/13.png",
       title: "Album"
-    },
+    }*/,
     { src: "/imgs/14.JPEG",
-      title: "Bandcamp"
+      title: "Bandcamp",
+      link: "https://view3.bandcamp.com/album/paper"
     },
   ];
 
@@ -79,14 +81,15 @@ export default function Main() {
     <div className="total-container">
       <div className="column-container">
         {ALL_FILES.map((file, index) => (
-          <ImageColumn 
+          file ? <ImageColumn 
             src={file.src} 
             key={index} 
             expanded={file.src === expandedSrc} 
             callback={setOpen} 
             title={file.title}
             body={file.body}
-          />
+            link={file.link}
+          /> : <></>
         ))}
       </div>
     </div>

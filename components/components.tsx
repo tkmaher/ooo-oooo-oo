@@ -1,12 +1,12 @@
 export function Merch() {
     return (
         <div className="merch-container">
-                <img src="HC6RuPYWIAEl58X.png"/>
             <a href="https://view3.bandcamp.com/album/paper" target="_blank">
+                <img src="HC6RuPYWIAEl58X.png"/>
                 CD + booklet
             </a>
-                <img src="https://f4.bcbits.com/img/0043150442_10.jpg"/>
             <a href="https://view3.bandcamp.com/merch/quilt" target="_blank">
+                <img src="https://f4.bcbits.com/img/0043150442_10.jpg"/>
                 Quilt
             </a>
         </div>
@@ -28,8 +28,24 @@ export function Movie() {
 }
 
 export function AlbumPaper() {
+    const songs = [
+        { name: "Paper", length: "00:18", link: "https://view3.bandcamp.com/track/paper"},
+        { name: "Tell the Truth", length: "04:50", link: "https://view3.bandcamp.com/track/tell-the-truth"},
+        { name: "Text", length: "03:30", link: "https://view3.bandcamp.com/track/text"},
+        { name: "04/15/27", length: "03:43", link: "https://view3.bandcamp.com/track/4-15-27"},
+        { name: "Magician", length: "00:11", link: "https://view3.bandcamp.com/track/magician"},
+        { name: "Josephine", length: "03:38", link: "https://view3.bandcamp.com/track/josephine"},
+        { name: "Your Turn to Be Me", length: "03:33", link: "https://view3.bandcamp.com/track/your-turn-to-be-me"},
+    ]
     return (
-        <iframe style={{border: 0}} src="https://bandcamp.com/EmbeddedPlayer/album=2774788724/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://view3.bandcamp.com/album/paper">Paper by View 3</a></iframe>    
+        <div className="events-container">
+            {songs.map((song, index) => (
+                <div key={index} className="event">
+                    <a href={song.link} target="_blank">{song.name}</a>
+                    <div className="event-name">{song.length}</div>
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -43,15 +59,20 @@ export function Events({isPast}: {isPast: boolean}) {
         { name: "", date: "2026-08-04", location: "State St. Pub"},
         { name: "", date: "2026-08-05", location: "Lambda"},
         { name: "", date: "2026-08-06", location: "318PGH"},
-        { name: "", date: "2026-08-07", location: ""},
+        { name: "", date: "2026-08-07", location: "TBA"},
         { name: "", date: "2026-08-08", location: "Future Space"},
         { name: "", date: "2026-08-10", location: "Moondog Cafe"},
     ]
+
+    const sorted = events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).filter(event => isPast ? new Date(event.date) < new Date() : new Date(event.date) >= new Date());
+    const final = isPast ? sorted.reverse() : sorted;
+
     return (
         <div className="events-container">
-            {events.filter(event => isPast ? new Date(event.date) < new Date() : new Date(event.date) >= new Date()).map((event, index) => (
+            {final.map((event, index) => (
                 <div key={index} className="event">
-                    <div className="event-name">{new Date(event.date).toLocaleDateString()} at {event.location} {event.name && ` (${event.name})`}</div>
+                    <div>{new Date(event.date).toLocaleDateString()}</div>
+                    <div className="event-name">{event.location} {event.name && ` (${event.name})`}</div>
                 </div>
             ))}
         </div>
