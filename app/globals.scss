@@ -29,11 +29,11 @@ body {
 
 .image-title {
   position: absolute;
-  bottom: 0;
+  bottom: -1.5em;
   left: 0;
-  z-index: 2; /* force it above the image, explicitly */
-  rotate: -90deg;
+  z-index: 2;
   transform-origin: left top;
+  transform: rotate(-90deg);
   width: auto;
   word-break: keep-all;
   white-space: nowrap;
@@ -42,7 +42,6 @@ body {
   color: var(--foreground);
   font-size: 1.2em;
   background: var(--background);
-
 }
 
 .image-column {
@@ -156,6 +155,8 @@ a {
 
   .image-title {
     rotate: 0deg;
+    transform: none;
+    bottom: 0;
   }
 
   .content-body {
