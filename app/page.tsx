@@ -1,7 +1,7 @@
 "use client";
 
 import ImageColumn from "@/components/imagecolumn";
-import { Merch, Info, Movie, AlbumPaper, Events} from "@/components/components";
+import { Merch, Info, Movie, AlbumPaper, Events, Email} from "@/components/components";
 import { useCallback, useState } from "react";
 
 
@@ -20,22 +20,22 @@ export default function Main() {
 
   const ALL_FILES = [
     { 
-      src: "/imgs/1.png",
+      src: "/imgs/9.png",
       title: "Album",
       body: <AlbumPaper/>
     },
     { 
-      src: "/imgs/2.png",
-      title: "Upcoming events",
+      src: "/imgs/8.png",
+      title: "Upcoming shows",
       body: <Events isPast={false}/>
     },
     { 
-      src: "/imgs/3.PNG",
-      title: "Past events",
+      src: "/imgs/13.png",
+      title: "Past shows",
       body: <Events isPast={true}/>
     },
     { 
-      src: "/imgs/4.png", 
+      src: "/imgs/1.png", 
       title: "Info",
       body: <Info/>
     },
@@ -50,7 +50,7 @@ export default function Main() {
     },
     { src: "/imgs/7.png", 
       title: "Contact",
-      link: "mailto:dust54089@gmail.com"
+      body: <Email/>
     },
     /*{ src: "/imgs/8.png",
       title: "Album"

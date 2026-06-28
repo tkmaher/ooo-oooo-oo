@@ -78,3 +78,20 @@ export function Events({isPast}: {isPast: boolean}) {
         </div>
     )
 }
+
+export function Email() {
+    return (
+        <div className="events-container">
+            <div className="event">
+                dust54089@gmail.com
+            </div>
+            <div  className="event">
+                2755 W Augusta Blvd
+                <br/>
+                3F
+                <br/>
+                Chicago IL 60622
+            </div>
+        </div>
+    );
+}
