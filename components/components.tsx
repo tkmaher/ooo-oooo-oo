@@ -59,9 +59,9 @@ export function Events({isPast}: {isPast: boolean}) {
         { name: "", date: "2026-08-04", location: "State St. Pub"},
         { name: "", date: "2026-08-05", location: "Lambda"},
         { name: "", date: "2026-08-06", location: "318PGH"},
-        { name: "", date: "2026-08-07", location: "TBA"},
+        { name: "", date: "2026-08-07", location: "Ulana's"},
         { name: "", date: "2026-08-08", location: "Future Space"},
-        { name: "", date: "2026-08-10", location: "TBA"},
+        { name: "", date: "2026-08-10", location: "The High Dive"},
     ]
 
     const sorted = events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).filter(event => isPast ? new Date(event.date) < new Date() : new Date(event.date) >= new Date());
